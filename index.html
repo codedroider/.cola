@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>.cola</title>
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #f5f5f5; }
+        .container { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 320px; display: flex; flex-direction: column; gap: 15px; }
+        input, button { padding: 10px; font-size: 14px; border: 1px solid #ccc; border-radius: 4px; }
+        button { cursor: pointer; color: white; border: none; font-weight: bold; }
+        .btn-encode { background: #e53935; }
+        .btn-decode { background: #1e88e5; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <input type="password" id="passInput" placeholder="Enter password">
+    <input type="file" id="fileInput">
+    <button class="btn-encode" id="encodeBtn">Encode</button>
+    <button class="btn-decode" id="decodeBtn">Decode</button>
+</div>
+
+<script src=".js"></script>
+<script>
+    const passInput = document.getElementById('passInput');
+    const fileInput = document.getElementById('fileInput');
+    const encodeBtn = document.getElementById('encodeBtn');
+    const decodeBtn = document.getElementById('decodeBtn');
+
+    function checkInputs() {
+        const file = fileInput.files[0];
+        const pass = passInput.value;
+        if (!file || !pass) {
+            alert("Please select a file and enter a password!");
+            return null;
+        }
+        window.password = pass;
+        return file;
+    }
+
+    encodeBtn.addEventListener('click', async () => {
+        const file = checkInputs();
+        if (file) await colaUse(file);
+    });
+
+    decodeBtn.addEventListener('click', async () => {
+        const file = checkInputs();
+        if (file) await colaUsed(file);
+    });
+</script>
+
+</body>
+</html>
